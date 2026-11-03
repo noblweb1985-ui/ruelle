@@ -1,0 +1,557 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="bean" viewBox="0 0 40 52"><ellipse cx="20" cy="26" rx="17" ry="24" fill="#5A3322"/><ellipse cx="15" cy="18" rx="6" ry="9" fill="#7A4A33" opacity=".7"/><path d="M20 4c-7 9 6 16 0 24s5 14 0 20" fill="none" stroke="#2C1911" stroke-width="3.2" stroke-linecap="round"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <nav class="nav" aria-label="Main">
+      <a href="#menu">Menu</a>
+      <a href="#coffee">Beans</a>
+      <a href="#ritual">Our story</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="brand" href="#top" aria-label="Café Ruelle, home"><img src="media/logo-cream.png" alt="Café Ruelle"></a>
+    <div class="bar-right">
+      <span class="status" id="status">Hours</span>
+      <button class="cart-btn" id="cart-btn" type="button" aria-label="Your order, 0 items">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="badge" id="badge" hidden>0</span>
+      </button>
+      <a class="cta" href="#menu"><span class="btn btn-cream">Order ahead</span><span class="arrow" aria-hidden="true"><svg><use href="#arrow"/></svg></span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- 01 Hero: the Kling video, scrubbed by scroll -->
+  <section class="journey" id="hero" aria-label="Welcome">
+    <div class="stage" id="stage">
+      <img class="media" id="poster" src="media/poster.webp" alt="A white cup of coffee on a mossy hilltop at sunrise, above the clouds" fetchpriority="high">
+      <video class="media" muted playsinline preload="none" aria-hidden="true"></video>
+      <img class="media" id="plate" src="media/plate.webp" alt="" aria-hidden="true">
+      <div class="shade"></div>
+      <div class="hero-copy wrap" id="hero-copy">
+        <div class="inner">
+          <div class="hero-top">
+            <p class="eyebrow">Ottawa coffee roasters</p>
+            <h1><span class="hl">From the summit</span> to your cup</h1>
+          </div>
+          <div class="hero-foot">
+            <p class="lede">Grown high in the mountains, roasted behind our counter every Tuesday, and poured fresh for the road. Order ahead and it waits for you with your name on it.</p>
+            <div class="hero-actions">
+              <a class="cta" href="#menu"><span class="btn btn-cream">Order ahead</span><span class="arrow" aria-hidden="true"><svg><use href="#arrow"/></svg></span></a>
+              <button class="play" id="watch" type="button"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></span>Watch the pour</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="caps">
+        <div class="cap wrap"><div class="inner"><p class="eyebrow">Huila, Colombia · 1,750 m</p><h2>Grown <span class="hl">up high</span></h2></div></div>
+        <div class="cap wrap"><div class="inner"><p class="eyebrow">Roasted here every Tuesday</p><h2>Poured <span class="hl">by hand</span></h2></div></div>
+        <div class="cap wrap"><div class="inner"><p class="eyebrow">Order ahead · ready in 10 minutes</p><h2>Ready <span class="hl">for the road</span></h2></div></div>
+      </div>
+      <div class="cue" aria-hidden="true"><span id="cue-text">Scroll to pour</span><span class="track"><i id="cue-bar"></i></span></div>
+    </div>
+    <div class="scrub-track" aria-hidden="true"></div>
+  </section>
+
+  <!-- The cup lifted out of the last video frame -->
+  <div id="cupfx" aria-hidden="true"><img id="cup-png" src="media/cup.png" alt=""><canvas id="cup3d"></canvas></div>
+
+  <!-- 02 The ritual: the cup lands here -->
+  <section class="ritual torn" id="ritual">
+    <div class="wrap ritual-grid">
+      <div class="ritual-copy">
+        <p class="eyebrow">Our ritual</p>
+        <div style="position:relative">
+          <img class="script" src="media/logo-mustard.png" alt="">
+          <p class="statement">Coffee isn’t a rush, it’s a ritual <span class="pill summit" role="img" aria-label="Moss on the mountain"></span>. Farms we know by name <span class="pill pour" role="img" aria-label="Coffee being poured"></span>, roasted here every Tuesday <span class="pill beans" role="img" aria-label="Roasted beans on our counter"></span> &amp; poured fresh for the road.</p>
+        </div>
+        <div class="ritual-actions">
+          <a class="cta dark" href="#menu"><span class="btn btn-choc">Order ahead</span><span class="arrow" aria-hidden="true"><svg><use href="#arrow"/></svg></span></a>
+          <a class="link" href="#promise">How we source our beans</a>
+        </div>
+      </div>
+      <div class="slot-wrap">
+        <button class="slot" id="slot" type="button" aria-label="Spin the cup">
+          <img src="media/cup-logo.png" alt="A Café Ruelle to-go cup with a kraft sleeve">
+          <span class="shadow" id="slot-shadow"></span>
+        </button>
+        <p class="spin-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>Drag to spin</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Menu -->
+  <section class="menu band" id="menu">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">On the menu</p>
+        <h2>Poured <span class="hl">to order</span></h2>
+        <p>Tap a drink to add it, choose a pickup time, and it’s on the counter when you walk in.</p>
+      </div>
+      <div class="tiles" id="tiles" role="group" aria-label="Filter the menu"></div>
+      <div class="menu-bar"><span id="menu-count" aria-live="polite"></span><button type="button" id="menu-all" hidden>Show everything</button></div>
+      <ul class="items" id="items"></ul>
+    </div>
+  </section>
+
+  <!-- 04 Promises -->
+  <section class="promise torn torn-bottom" id="promise">
+    <svg class="bean" viewBox="0 0 40 52" style="left:3%; top:44%; transform:rotate(-24deg)" data-speed="-.12"><use href="#bean"/></svg>
+    <svg class="bean" viewBox="0 0 40 52" style="right:4%; top:46%; width:34px; transform:rotate(38deg)" data-speed=".1"><use href="#bean"/></svg>
+    <svg class="bean" viewBox="0 0 40 52" style="left:44%; bottom:6%; width:30px; transform:rotate(70deg)" data-speed="-.08"><use href="#bean"/></svg>
+    <svg class="bean" viewBox="0 0 40 52" style="right:30%; top:4%; width:24px; transform:rotate(-60deg)" data-speed=".16"><use href="#bean"/></svg>
+    <div class="wrap promise-grid">
+      <div class="promise-col">
+        <div><h3>— Direct trade</h3><p>We buy from three farms, above the market price, and go back to the same producers every harvest.</p></div>
+        <div><h3>— Poured by hand</h3><p>Every shot is weighed and timed: 18 grams in, 36 grams out, about 28 seconds.</p></div>
+      </div>
+      <div class="promise-art">
+        <div class="disc" role="img" aria-label="Coffee poured from a white cup above the clouds"></div>
+        <p class="badge-ring"><span><b>12 kg</b>per roast</span></p>
+      </div>
+      <div class="promise-col right">
+        <div><h3>Roasted Tuesdays —</h3><p>Small batches in our own roaster, behind the counter, profiled for each origin.</p></div>
+        <div><h3>Fresh for 3 weeks —</h3><p>Every bag carries its roast date. After three weeks, we stop serving it.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 Seasonal beans -->
+  <section class="coffee band" id="coffee">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">On the grinder</p>
+        <h2>This season’s <span class="hl">beans</span></h2>
+        <p>Three origins, rotated with the harvests. Add a bag to your order and take it home.</p>
+      </div>
+      <div class="bags" id="bags"></div>
+      <form class="sub" id="sub-form">
+        <div><h3>Never run out. <span class="hl">Subscribe.</span></h3><p>A bag of this season’s coffee, roasted the week you get it. Pause or cancel anytime.</p></div>
+        <fieldset style="border:0; margin:0; padding:0; min-width:0">
+          <legend class="sr">How often</legend>
+          <div class="seg">
+            <label><input type="radio" name="freq" id="freq-2" value="2" checked><span>Every 2 weeks</span></label>
+            <label><input type="radio" name="freq" id="freq-4" value="4"><span>Every 4 weeks</span></label>
+          </div>
+        </fieldset>
+        <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap"><p class="sub-price" id="sub-price"></p><button class="btn btn-mustard" type="submit">Subscribe</button></div>
+        <p class="sub-msg" id="sub-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- 06 Reviews (placeholders until the café adds real ones) -->
+  <section class="reviews band" style="padding-top:0">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow">Regulars</p>
+        <h2>Our regulars <span class="hl">say it best</span></h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M6 38V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17zm22 0V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17z"/></svg>
+          <blockquote>The maple oat latte is the reason I take the long way to work.</blockquote>
+          <footer><span>Sample review</span>Replace with a real one</footer></figure>
+        <figure class="quote"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M6 38V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17zm22 0V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17z"/></svg>
+          <blockquote>I order on the bus, walk in, and my cup is waiting with my name on it.</blockquote>
+          <footer><span>Sample review</span>Replace with a real one</footer></figure>
+        <figure class="quote"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M6 38V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17zm22 0V26c0-9 4-15 13-18l2 4c-5 2-7 5-7 9h7v17z"/></svg>
+          <blockquote>They told me the farm and the roast date of my beans. That’s care.</blockquote>
+          <footer><span>Sample review</span>Replace with a real one</footer></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Visit -->
+  <section class="visit band torn" id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <p class="eyebrow">Come say hi</p>
+        <address class="addr" id="addr"></address>
+        <p class="now" id="now"></p>
+        <table class="hours" aria-label="Opening hours"><tbody id="hours"></tbody></table>
+        <div class="visit-actions">
+          <a class="cta" id="directions" href="#" target="_blank" rel="noopener"><span class="btn btn-cream">Directions</span><span class="arrow" aria-hidden="true"><svg><use href="#arrow"/></svg></span></a>
+          <span class="phone" id="phone"></span>
+        </div>
+      </div>
+      <div class="visit-photo">
+        <img src="media/counter.webp" alt="A Café Ruelle to-go cup on our wooden counter" loading="lazy">
+        <div class="amen" id="amen"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="news">
+      <h2>New beans, <span class="hl">first</span></h2>
+      <form id="news-form" novalidate>
+        <label class="sr" for="news-email">Email</label>
+        <input id="news-email" type="email" placeholder="Your email" autocomplete="email" required>
+        <button class="btn btn-mustard" type="submit">Sign up</button>
+        <p class="news-msg" id="news-msg" role="status"></p>
+      </form>
+    </div>
+    <div class="foot">
+      <div><img src="media/logo-cream.png" alt="Café Ruelle"><span id="foot-addr"></span><span id="foot-phone"></span></div>
+      <div><strong>Coffee</strong><a href="#menu">Menu</a><a href="#coffee">Beans</a><a href="#coffee">Subscription</a></div>
+      <div><strong>House</strong><a href="#ritual">Our story</a><a href="#promise">Sourcing</a><a href="#visit">Wholesale</a></div>
+      <div><strong>Follow</strong><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></div>
+    </div>
+    <div class="fine"><span>© 2026 Café Ruelle</span><span>Café template for Façade · demo content, orders are not sent</span></div>
+  </div>
+</footer>
+
+<dialog class="drawer" id="cart" aria-labelledby="cart-title">
+  <div class="drawer-head"><h2 id="cart-title">Your order</h2><button class="x" type="button" id="cart-close" aria-label="Close your order">×</button></div>
+  <div class="drawer-body" id="cart-body"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-text"></span><button class="btn btn-mustard" type="button" id="toast-open">View order</button></div>
+
+<!--CUPJS-->
+<script>
+/* =====================================================================
+   SITE CONTENT
+   Everything the café edits lives here. In Façade each key maps to a
+   Payload field or block (Hero video, Menu, Beans, Visit).
+   ===================================================================== */
+const SITE = {
+  video: 'media/pour',                        // media/pour-1080.mp4 and media/pour-720.mp4
+  three: 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js',
+  taxRate: 0.13, taxLabel: 'HST 13%',
+  categories: [
+    { id: 'espresso', name: 'Espresso' }, { id: 'lattes', name: 'Lattes' }, { id: 'cold', name: 'Cold brew' },
+    { id: 'tea', name: 'Tea' }, { id: 'pastry', name: 'Pastries' }, { id: 'beans', name: 'Beans', jump: '#coffee' }
+  ],
+  menu: [
+    { cat: 'espresso', name: 'Espresso',        desc: 'House blend, 18 g in, 36 g out.',                 price: 3.50 },
+    { cat: 'espresso', name: 'Cortado',         desc: 'Espresso cut with the same amount of warm milk.', price: 4.50 },
+    { cat: 'espresso', name: 'Americano',       desc: 'A double shot over hot water, 12 oz.',            price: 4.00 },
+    { cat: 'lattes',   name: 'Maple oat latte', desc: 'Quebec maple, oat milk and a pinch of sea salt.', price: 6.50, tag: 'Signature' },
+    { cat: 'lattes',   name: 'Latte',           desc: 'Double espresso, silky steamed milk, 12 oz.',     price: 5.75 },
+    { cat: 'lattes',   name: 'Mocha',           desc: '70% dark chocolate, espresso, steamed milk.',     price: 6.25 },
+    { cat: 'cold',     name: 'Cold brew',       desc: 'Steeped 18 hours, served over ice.',              price: 5.25 },
+    { cat: 'cold',     name: 'Cold brew tonic', desc: 'Cold brew over tonic water and orange peel.',     price: 5.75, tag: 'Seasonal' },
+    { cat: 'cold',     name: 'Iced latte',      desc: 'Double espresso, cold milk, ice.',                price: 6.00 },
+    { cat: 'tea',      name: 'Chai latte',      desc: 'Our own spice blend, steeped in milk.',           price: 5.50 },
+    { cat: 'tea',      name: 'Matcha latte',    desc: 'Ceremonial matcha, your choice of milk.',         price: 6.00 },
+    { cat: 'tea',      name: 'Loose-leaf tea',  desc: 'Ask for this week’s four teas.',                  price: 3.75 },
+    { cat: 'pastry',   name: 'Butter croissant', desc: 'Baked in the shop at 7 every morning.',          price: 3.95 },
+    { cat: 'pastry',   name: 'Cardamom bun',    desc: 'Swedish-style, with pearl sugar.',                price: 4.50, tag: 'Local favourite' },
+    { cat: 'pastry',   name: 'Oat & date cookie', desc: 'No dairy, no eggs.',                            price: 3.25, tag: 'Vegan' }
+  ],
+  beans: [
+    { id: 'col', country: 'Colombia', region: 'Huila', producer: 'Finca El Mirador', altitude: '1,750 m', process: 'Washed', variety: 'Caturra, Castillo', notes: 'Red apple · panela · cocoa', roasted: 'Oct 27', price: 22, color: '#6B3D24' },
+    { id: 'eth', country: 'Ethiopia', region: 'Guji', producer: 'Hambela', altitude: '2,100 m', process: 'Natural', variety: 'Heirloom', notes: 'Blueberry · jasmine · bergamot', roasted: 'Oct 27', price: 24, color: '#7A3B3F' },
+    { id: 'gua', country: 'Guatemala', region: 'Huehuetenango', producer: 'La Libertad', altitude: '1,800 m', process: 'Washed', variety: 'Bourbon', notes: 'Plum · brown sugar · milk chocolate', roasted: 'Oct 27', price: 21, color: '#3F4A2C' }
+  ],
+  subscription: { 2: 20, 4: 21 },             // price per 340 g bag
+  address: { street: '88 Maple Lane', city: 'Ottawa, ON K1N 5J2', maps: 'https://www.google.com/maps/search/?api=1&query=Ottawa+ON' },
+  phone: '(613) 555-0142',
+  amenities: ['Free Wi-Fi', 'Outlets at the bar', 'Patio in summer', 'Dogs welcome'],
+  hours: [[540, 960], [420, 1080], [420, 1080], [420, 1080], [420, 1080], [420, 1140], [480, 1020]],  // Sun … Sat, minutes
+  days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+};
+
+/* Tile drawings, 64 × 64 */
+const ICONS = {
+  espresso: '<ellipse cx="32" cy="50" rx="24" ry="5" fill="#E2CBB0"/><path d="M16 26h28v12a10 10 0 0 1-10 10h-8a10 10 0 0 1-10-10z" fill="#fff" stroke="#3B2217" stroke-width="3"/><path d="M44 30h3a5 5 0 0 1 0 10h-4" fill="none" stroke="#3B2217" stroke-width="3"/><ellipse cx="30" cy="26" rx="14" ry="3.5" fill="#6B3D24"/><path d="M25 18c-2-3 2-5 0-8M33 18c-2-3 2-5 0-8" fill="none" stroke="#C9A27A" stroke-width="2.5" stroke-linecap="round"/>',
+  lattes: '<path d="M18 12h28l-3 42a4 4 0 0 1-4 4H25a4 4 0 0 1-4-4z" fill="#fff" stroke="#3B2217" stroke-width="3" stroke-linejoin="round"/><path d="M20.5 30h23l-1.6 22a3 3 0 0 1-3 3H25.1a3 3 0 0 1-3-3z" fill="#C9935F"/><path d="M19.7 22h24.6l-.6 8H20.3z" fill="#F6E9D7"/><path d="M27 26c3-3 7-3 10 0" fill="none" stroke="#C9935F" stroke-width="2" stroke-linecap="round"/>',
+  cold: '<path d="M17 14h30l-3 40a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4z" fill="#F7EFE4" stroke="#3B2217" stroke-width="3" stroke-linejoin="round"/><path d="M19 26h26l-2.3 28a3 3 0 0 1-3 2.7H24.3a3 3 0 0 1-3-2.7z" fill="#5A3322"/><rect x="23" y="28" width="9" height="9" rx="2" fill="#fff" opacity=".85" transform="rotate(-12 27 32)"/><rect x="33" y="33" width="8" height="8" rx="2" fill="#fff" opacity=".75" transform="rotate(14 37 37)"/><path d="M38 6l-4 30" stroke="#F5B301" stroke-width="4" stroke-linecap="round"/>',
+  tea: '<path d="M12 28h34v8a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14z" fill="#fff" stroke="#3B2217" stroke-width="3"/><path d="M46 31h3a5 5 0 0 1 0 10h-5" fill="none" stroke="#3B2217" stroke-width="3"/><ellipse cx="29" cy="28" rx="17" ry="3.5" fill="#B98A3E"/><path d="M33 28c2-8 8-12 14-14" fill="none" stroke="#3B2217" stroke-width="1.6"/><rect x="44" y="10" width="10" height="12" rx="2" fill="#F5B301" stroke="#3B2217" stroke-width="2" transform="rotate(-14 49 16)"/>',
+  pastry: '<path d="M6 40c5-16 16-24 26-24s21 8 26 24c-8 7-17 9-26 9S14 47 6 40z" fill="#E0A85A" stroke="#3B2217" stroke-width="3" stroke-linejoin="round"/><path d="M21 20l5 27M43 20l-5 27M32 16v33" stroke="#3B2217" stroke-width="2.6" stroke-linecap="round"/><path d="M12 36c4-2 6-6 8-11M52 36c-4-2-6-6-8-11" stroke="#B37733" stroke-width="2" fill="none" stroke-linecap="round"/>',
+  beans: '<path d="M16 16h32l3 40H13z" fill="#C49F7B" stroke="#3B2217" stroke-width="3" stroke-linejoin="round"/><path d="M16 16l4-6h24l4 6" fill="#B08A64" stroke="#3B2217" stroke-width="3" stroke-linejoin="round"/><rect x="20" y="26" width="24" height="16" rx="3" fill="#F5B301"/><ellipse cx="32" cy="34" rx="4.5" ry="6" fill="#5A3322"/><path d="M32 28.5c-2 2.5 2 4 0 6.5s2 3.5 0 5" fill="none" stroke="#2C1911" stroke-width="1.4"/>'
+};
+
+(function(){
+  const $ = (s, el = document) => el.querySelector(s);
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const money = n => '$' + n.toFixed(2);
+  const clock = m => { const h = Math.floor(m / 60), mm = m % 60, ap = h >= 12 ? 'pm' : 'am', h12 = ((h + 11) % 12) + 1; return mm ? `${h12}:${String(mm).padStart(2, '0')} ${ap}` : `${h12} ${ap}`; };
+  const clamp = (v, a = 0, b = 1) => v < a ? a : v > b ? b : v;
+  const smooth = v => { v = clamp(v); return v * v * (3 - 2 * v); };
+  const ease = v => { v = clamp(v); return v < .5 ? 4 * v * v * v : 1 - Math.pow(-2 * v + 2, 3) / 2; };
+
+  /* ---------- Hours ---------- */
+  function openState(now = new Date()){
+    const d = now.getDay(), m = now.getHours() * 60 + now.getMinutes(), [o, c] = SITE.hours[d];
+    if (m >= o && m < c) return { open: true, d, m, text: `Open · closes ${clock(c)}` };
+    if (m < o) return { open: false, d, m, text: `Closed · opens ${clock(o)}` };
+    return { open: false, d, m, text: `Closed · opens ${clock(SITE.hours[(d + 1) % 7][0])} tomorrow` };
+  }
+  function paintHours(){
+    const s = openState();
+    $('#status').textContent = s.text; $('#status').classList.toggle('open', s.open);
+    $('#now').textContent = s.open ? `Open now · closes at ${clock(SITE.hours[s.d][1])}` : s.text.replace('Closed ·', 'Closed now ·');
+    $('#now').classList.toggle('open', s.open);
+    const tb = $('#hours'); tb.innerHTML = '';
+    [1, 2, 3, 4, 5, 6, 0].forEach(i => { const tr = el('tr', i === s.d ? 'today' : ''); tr.append(el('td', '', SITE.days[i] + (i === s.d ? ' · today' : '')), el('td', '', `${clock(SITE.hours[i][0])} – ${clock(SITE.hours[i][1])}`)); tb.append(tr); });
+  }
+  paintHours(); setInterval(paintHours, 60000);
+  const A = SITE.address;
+  $('#addr').append(A.street, document.createElement('br'), A.city.split(' K')[0]);
+  $('#directions').href = A.maps; $('#phone').textContent = SITE.phone;
+  $('#foot-addr').textContent = `${A.street}, ${A.city}`; $('#foot-phone').textContent = SITE.phone;
+  SITE.amenities.forEach(a => $('#amen').append(el('span', '', a)));
+
+  /* ---------- Order ---------- */
+  const order = []; let pickup = '';
+  const cart = $('#cart'), toast = $('#toast');
+  function count(){ return order.reduce((a, x) => a + x.qty, 0); }
+  function add(key, name, detail, price){
+    const f = order.find(x => x.key === key);
+    if (f) f.qty++; else order.push({ key, name, detail, price, qty: 1 });
+    paintCart();
+    $('#toast-text').textContent = `${name} added · ${count()} in your order`;
+    toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 3200);
+  }
+  function slots(){
+    const s = openState(), out = []; let day = s.d, start;
+    if (s.open){ out.push(['asap', 'As soon as possible (about 10 min)']); start = Math.ceil((s.m + 15) / 15) * 15; }
+    else if (s.m < SITE.hours[s.d][0]) start = SITE.hours[s.d][0];
+    else { day = (s.d + 1) % 7; start = SITE.hours[day][0]; }
+    const pre = day !== s.d ? 'Tomorrow, ' : 'Today, ';
+    for (let m = start; m <= SITE.hours[day][1] - 15 && out.length < 14; m += 15) out.push([pre + clock(m), pre + clock(m)]);
+    return out;
+  }
+  function paintCart(){
+    const n = count(), b = $('#badge');
+    b.hidden = !n; b.textContent = n; $('#cart-btn').setAttribute('aria-label', `Your order, ${n} item${n === 1 ? '' : 's'}`);
+    const body = $('#cart-body'); body.innerHTML = '';
+    if (!n){ body.append(el('p', 'empty', 'Nothing here yet. Tap + on any drink, pastry or bag of beans.')); const go = el('a', 'btn btn-choc', 'Browse the menu'); go.href = '#menu'; go.onclick = () => cart.close(); body.append(go); return; }
+    const sub = order.reduce((a, x) => a + x.qty * x.price, 0);
+    const ul = el('ul', 'lines');
+    order.forEach(x => {
+      const li = el('li'), d = el('div'); d.append(el('span', 'nm', x.name), el('small', '', x.detail));
+      const q = el('div', 'qty');
+      const minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', `One less ${x.name}`);
+      const plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', `One more ${x.name}`);
+      minus.onclick = () => { x.qty--; if (!x.qty) order.splice(order.indexOf(x), 1); paintCart(); };
+      plus.onclick = () => { x.qty++; paintCart(); };
+      q.append(minus, el('output', '', x.qty), plus);
+      li.append(d, q, el('span', 'amt', money(x.qty * x.price))); ul.append(li);
+    });
+    const tot = el('div', 'totals');
+    [['Subtotal', money(sub)], [SITE.taxLabel, money(sub * SITE.taxRate)]].forEach(([k, v]) => { const r = el('div'); r.append(el('span', '', k), el('span', '', v)); tot.append(r); });
+    const g = el('div', 'grand'); g.append(el('span', '', 'Total'), el('span', '', money(sub * (1 + SITE.taxRate)))); tot.append(g);
+    const fld = el('div', 'field'), lab = el('label', '', 'Pickup time'), sel = el('select'); lab.htmlFor = sel.id = 'pickup';
+    slots().forEach(([v, t]) => sel.append(new Option(t, v, false, v === pickup))); pickup = sel.value; sel.onchange = () => pickup = sel.value;
+    fld.append(lab, sel);
+    const go = el('button', 'btn btn-choc', 'Place order'); go.type = 'button';
+    go.onclick = () => {
+      const num = 100 + Math.floor(Math.random() * 900);
+      const when = pickup === 'asap' ? 'in about 10 minutes' : pickup.toLowerCase().replace('today, ', 'at ').replace('tomorrow, ', 'tomorrow at ');
+      order.length = 0; paintCart(); body.innerHTML = '';
+      const dn = el('div', 'done'); dn.append(el('p', 'eyebrow', 'Order received'), el('p', 'num', `#${num}`), el('p', '', `Ready ${when}. Give this number at the counter.`), el('p', 'demo', 'Demo site: nothing was sent.'));
+      const again = el('button', 'btn btn-line', 'Close'); again.type = 'button'; again.onclick = () => { cart.close(); paintCart(); }; dn.append(again);
+      body.append(dn);
+    };
+    body.append(ul, tot, fld, go, el('p', 'demo', 'Demo site: orders are not sent anywhere.'));
+  }
+  const openCart = () => { toast.classList.remove('show'); if (!cart.open) cart.showModal(); };
+  $('#cart-btn').onclick = openCart; $('#toast-open').onclick = openCart; $('#cart-close').onclick = () => cart.close();
+  cart.addEventListener('click', e => { if (e.target === cart) cart.close(); });
+  paintCart();
+
+  /* ---------- Menu ---------- */
+  let filter = null;
+  SITE.categories.forEach(c => {
+    const b = el('button', 'tile'); b.type = 'button'; b.dataset.id = c.id;
+    const pic = el('span', 'pic'); pic.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[c.id]}</svg>`;
+    b.append(pic, el('b', '', c.name));
+    if (c.jump){ b.onclick = () => document.querySelector(c.jump).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
+    else { b.setAttribute('aria-pressed', 'false'); b.onclick = () => { filter = filter === c.id ? null : c.id; paintMenu(); }; }
+    $('#tiles').append(b);
+  });
+  function paintMenu(){
+    const list = SITE.menu.filter(m => !filter || m.cat === filter), ul = $('#items'); ul.innerHTML = '';
+    list.forEach(m => {
+      const li = el('li', 'item'); li.append(el('h3', '', m.name));
+      if (m.tag) li.append(el('span', 'tag' + (m.tag === 'Signature' ? '' : ' alt'), m.tag)); else li.append(el('span'));
+      li.append(el('p', 'desc', m.desc));
+      const row = el('div', 'row'), plus = el('button', 'add', '+'); plus.type = 'button'; plus.setAttribute('aria-label', `Add ${m.name} to your order`);
+      plus.onclick = () => add('m-' + m.name, m.name, m.cat === 'pastry' ? 'Pastry' : '12 oz', m.price);
+      row.append(el('span', 'price', money(m.price)), plus); li.append(row); ul.append(li);
+    });
+    const cat = SITE.categories.find(c => c.id === filter);
+    $('#menu-count').textContent = cat ? `${list.length} ${cat.name.toLowerCase()}` : `Everything on the menu · ${list.length} items`;
+    $('#menu-all').hidden = !filter;
+    document.querySelectorAll('.tile[aria-pressed]').forEach(t => t.setAttribute('aria-pressed', String(t.dataset.id === filter)));
+  }
+  $('#menu-all').onclick = () => { filter = null; paintMenu(); };
+  paintMenu();
+
+  /* ---------- Beans + subscription ---------- */
+  SITE.beans.forEach(c => {
+    const card = el('article', 'bag'), top = el('div', 'bag-top'); top.style.setProperty('--c', c.color);
+    const logo = el('img'); logo.src = 'media/logo-cream.png'; logo.alt = '';
+    const name = el('div'); name.style.cssText = 'display:grid; gap:8px; position:relative; z-index:1';
+    name.append(el('h3', '', c.producer), el('span', 'alt', `${c.altitude} · ${c.process}`));
+    top.append(el('p', 'origin', `${c.country} · ${c.region}`), logo, name);
+    const body = el('div', 'bag-body'); body.append(el('p', 'notes', c.notes));
+    const dl = el('dl', 'specs');
+    [['Variety', c.variety], ['Roasted', c.roasted], ['Process', c.process], ['Bag', '340 g, whole bean']].forEach(([k, v]) => { const d = el('div'); d.append(el('dt', '', k), el('dd', '', v)); dl.append(d); });
+    const foot = el('div', 'bag-foot'); foot.append(el('span', 'price', `$${c.price}`));
+    const b = el('button', 'btn btn-choc', 'Add to order'); b.type = 'button'; b.setAttribute('aria-label', `Add a bag of ${c.country} ${c.region} to your order`);
+    b.onclick = () => add('bag-' + c.id, `${c.country} ${c.region}`, '340 g bag, whole bean', c.price);
+    foot.append(b); body.append(dl, foot); card.append(top, body); $('#bags').append(card);
+  });
+  const subForm = $('#sub-form');
+  const paintSub = () => { const f = new FormData(subForm).get('freq'), p = $('#sub-price'); p.innerHTML = ''; p.append(`$${SITE.subscription[f]}`, el('small', '', ' / bag')); };
+  subForm.addEventListener('change', paintSub); paintSub();
+  subForm.addEventListener('submit', e => { e.preventDefault(); $('#sub-msg').textContent = 'Demo site: on the real site this opens checkout.'; });
+  $('#news-form').addEventListener('submit', e => {
+    e.preventDefault(); const v = $('#news-email').value.trim();
+    $('#news-msg').textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'You’re on the list. (Demo: nothing was sent.)' : 'Enter an email address like name@example.com.';
+  });
+
+  /* ---------- Header ---------- */
+  const header = $('.site-header'), journey = $('#hero'), stage = $('#stage');
+  const solid = () => header.classList.toggle('solid', window.scrollY > journey.offsetHeight - stage.offsetHeight - 2);
+
+  if (reduce){ window.addEventListener('scroll', solid, { passive: true }); solid(); $('#watch').hidden = true; return; }
+  root.classList.add('motion');
+
+  /* =====================================================================
+     THE POUR + THE CUP
+     One scroll loop drives the video, the captions and the cup.
+     ===================================================================== */
+  const video = $('video', stage), poster = $('#poster'), plate = $('#plate');
+  const fx = $('#cupfx'), png = $('#cup-png'), cv = $('#cup3d'), slot = $('#slot'), slotShadow = $('#slot-shadow'), slotImg = $('img', slot);
+  const caps = [...document.querySelectorAll('.cap')], heroCopy = $('#hero-copy'), cueBar = $('#cue-bar');
+  const beans = [...document.querySelectorAll('.bean[data-speed]')];
+  const VID = { w: 1920, h: 1080, cup: { x: 1097, y: 384, w: 334.5, h: 426 }, focus: 1290 };   // cup box measured in the last frame
+  const TURNS = 2;
+  let objX = 1, vReady = false, pS = 0, cup = null;
+
+  // The video loads as a blob with visible progress, 1080p on wide screens
+  const src = SITE.video + (window.matchMedia('(min-width: 900px)').matches ? '-1080.mp4' : '-720.mp4');
+  fetch(src).then(async r => {
+    if (!r.ok) throw 0;
+    const total = +r.headers.get('content-length') || 0;
+    if (!r.body || !total) return r.blob();
+    const reader = r.body.getReader(), chunks = []; let got = 0;
+    for (;;){ const { done, value } = await reader.read(); if (done) break; chunks.push(value); got += value.length; $('#cue-text').textContent = `Loading ${Math.round(got / total * 100)}%`; }
+    return new Blob(chunks, { type: 'video/mp4' });
+  }).then(b => { video.src = URL.createObjectURL(b); }).catch(() => { video.preload = 'auto'; video.src = src; })
+    .finally(() => {
+      video.addEventListener('loadeddata', () => {
+        vReady = true; stage.classList.add('ready'); $('#cue-text').textContent = 'Scroll to pour';
+        const p = video.play(); if (p && p.then) p.then(() => video.pause()).catch(() => {}); else video.pause();
+      }, { once: true });
+      video.load();
+    });
+
+  // Keep the cups in frame on every screen shape: pick the object-position that puts them at ~62% across
+  function layout(){
+    const r = stage.getBoundingClientRect(), s = Math.max(r.width / VID.w, r.height / VID.h), vw = VID.w * s;
+    const frac = r.width < 700 ? .6 : .64;
+    objX = vw > r.width + 1 ? clamp((frac * r.width - VID.focus * s) / (r.width - vw)) : .5;
+    const pos = `${(objX * 100).toFixed(2)}% 50%`;
+    [video, poster, plate].forEach(e => e.style.objectPosition = pos);
+    if (cup) cup.size(Math.max(slot.offsetHeight, VID.cup.h * s) * Math.min(window.devicePixelRatio || 1, 2));
+    dirty = true;
+  }
+  function rectA(){
+    const r = stage.getBoundingClientRect(), s = Math.max(r.width / VID.w, r.height / VID.h);
+    const ox = r.left + (r.width - VID.w * s) * objX, oy = r.top + (r.height - VID.h * s) * .5, c = VID.cup;
+    return { x: ox + c.x * s, y: oy + c.y * s, w: c.w * s, h: c.h * s };
+  }
+  const lerpR = (a, b, e) => ({ x: a.x + (b.x - a.x) * e, y: a.y + (b.y - a.y) * e, w: a.w + (b.w - a.w) * e, h: a.h + (b.h - a.h) * e });
+
+  // Caption windows on the video's progress: [in start, in end, out start, out end]
+  const WIN = [[.12, .17, .31, .36], [.40, .45, .60, .65], [.78, .83, .94, .975]];   // the last one gives way to the cup
+  function captions(p){
+    const h = 1 - smooth((p - .025) / .05);
+    heroCopy.style.opacity = h; heroCopy.style.visibility = h < .01 ? 'hidden' : '';
+    heroCopy.style.translate = `0 ${(-40 * (1 - h)).toFixed(1)}px`;
+    caps.forEach((c, i) => {
+      const [a, b, o1, o2] = WIN[i], v = smooth((p - a) / (b - a)) * (1 - smooth((p - o1) / (o2 - o1)));
+      c.style.opacity = v; c.style.visibility = v < .01 ? 'hidden' : 'visible';
+      c.style.translate = `0 ${(30 * (1 - v) * (p < (a + b) / 2 ? 1 : -1)).toFixed(1)}px`;
+    });
+    cueBar.style.transform = `scaleX(${p.toFixed(4)})`;
+  }
+
+  // Drag (or press) the landed cup to spin it; it settles back facing you
+  const drag = { rot: 0, vel: 0, on: false, x: 0, moved: 0 };
+  let locked = false;
+  slot.addEventListener('pointerdown', e => { if (!locked || !cup) return; drag.on = true; drag.x = e.clientX; drag.moved = 0; slot.setPointerCapture(e.pointerId); slot.classList.add('grabbing'); });
+  slot.addEventListener('pointermove', e => { if (!drag.on) return; const dx = e.clientX - drag.x; drag.x = e.clientX; drag.moved += Math.abs(dx); drag.vel = dx * .014; drag.rot += drag.vel; });
+  const release = () => { drag.on = false; slot.classList.remove('grabbing'); };
+  slot.addEventListener('pointerup', release); slot.addEventListener('pointercancel', release);
+  slot.addEventListener('click', () => { if (cup && locked && drag.moved < 4) drag.vel = .32; });
+
+  // "Watch the pour" scrolls through the video for the visitor
+  let auto = null;
+  const stopAuto = () => { if (auto){ cancelAnimationFrame(auto.raf); auto = null; } };
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(t => window.addEventListener(t, stopAuto, { passive: true }));
+  $('#watch').addEventListener('click', e => {
+    e.stopPropagation(); stopAuto();
+    const from = scrollY, to = slotLock(), t0 = performance.now(), dur = 7000;
+    auto = {}; const step = now => { const k = clamp((now - t0) / dur); window.scrollTo(0, from + (to - from) * (k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2)); if (k < 1 && auto) auto.raf = requestAnimationFrame(step); else auto = null; };
+    setTimeout(() => { auto = { raf: requestAnimationFrame(step) }; }, 0);
+  });
+
+  const trackEnd = () => journey.offsetTop + journey.offsetHeight - stage.offsetHeight;
+  const slotLock = () => { const r = slot.getBoundingClientRect(); return scrollY + r.top + r.height / 2 - innerHeight / 2; };
+
+  let dirty = true, lastY = -1;
+  function tick(){
+    const y = scrollY, te = trackEnd(), p = clamp(y / te), H = innerHeight;
+    pS += (p - pS) * .22; if (Math.abs(p - pS) < .0004) pS = p;
+    if (vReady && video.duration){ const t = pS * Math.max(0, video.duration - .04); if (Math.abs(video.currentTime - t) > .01 && !video.seeking) video.currentTime = t; }
+    captions(pS);
+    if (y !== lastY){ solid(); beans.forEach(b => { const r = b.parentElement.getBoundingClientRect(); b.style.translate = `0 ${clamp((r.top + r.height / 2 - H / 2) * +b.dataset.speed, -70, 70).toFixed(1)}px`; }); }
+
+    // the cup
+    const lock = Math.max(te + H * .35, slotLock());
+    const t = (y - te) / (lock - te);
+    const spawn = smooth((pS - .955) / .03);
+    plate.style.opacity = (pS > .985 || t > 0) ? 1 : 0;
+    let rect, pngA, cvA = 0, e = 0;
+    const sb = slot.getBoundingClientRect(), B = { x: sb.left, y: sb.top, w: sb.width, h: sb.height };
+    if (t <= 0){ rect = rectA(); pngA = spawn; }
+    else if (t < 1){ e = ease(t); rect = lerpR(rectA(), B, e); pngA = cup ? 1 - smooth(t / .1) : 1; cvA = cup ? smooth(t / .1) : 0; }
+    else { e = 1; rect = B; pngA = 0; cvA = cup ? 1 : 0; }
+    locked = t >= 1;
+    if (!cup){ slotImg.style.opacity = smooth((t - .85) / .15); if (t < 1) pngA *= 1 - smooth((t - .85) / .15); }
+    slotShadow.style.opacity = e;
+    const onScreen = rect.y < H && rect.y + rect.h > 0;
+    const show = (pngA > .001 || cvA > .001) && onScreen;
+    fx.style.visibility = show ? 'visible' : 'hidden';
+    if (show){
+      fx.style.transform = `translate3d(${rect.x.toFixed(2)}px, ${rect.y.toFixed(2)}px, 0)`;
+      fx.style.width = rect.w.toFixed(2) + 'px'; fx.style.height = rect.h.toFixed(2) + 'px';
+      png.style.opacity = pngA; cv.style.opacity = cvA;
+    }
+    if (cup){
+      if (!drag.on){
+        drag.rot += drag.vel; drag.vel *= .94;
+        if (Math.abs(drag.vel) < .003){ drag.vel = 0; const k = Math.round(drag.rot / (Math.PI * 2)) * Math.PI * 2; drag.rot += (k - drag.rot) * .08; if (Math.abs(k - drag.rot) < .0005) drag.rot = k; }
+      }
+      if (cvA > 0 && onScreen){
+        cup.set({ rot: (1 - e) * TURNS * Math.PI * 2 + drag.rot, mood: smooth((t - .04) / .55), logo: smooth((t - .06) / .3) });
+        if (cup.dirty || dirty){ cup.render(); dirty = false; }
+      }
+    }
+    lastY = y;
+    requestAnimationFrame(tick);
+  }
+  window.addEventListener('resize', layout);
+  layout(); requestAnimationFrame(tick);
+
+  // three.js, loaded only for the motion version
+  import(SITE.three).then(THREE => {
+    cup = createCup(THREE, cv, { logo: 'media/logo-texture.png' });
+    root.classList.add('has3d'); slotImg.style.opacity = '';
+    layout(); dirty = true;
+  }).catch(() => { /* no WebGL or no network: the PNG travels and the static cup takes over */ });
+})();
+</script>
