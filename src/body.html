@@ -65,7 +65,6 @@
       <div class="ritual-copy">
         <p class="eyebrow">Our ritual</p>
         <div style="position:relative">
-          <img class="script" src="media/logo-mustard.png" alt="">
           <p class="statement">Coffee isn’t a rush, it’s a ritual <span class="pill summit" role="img" aria-label="Moss on the mountain"></span>. Farms we know by name <span class="pill pour" role="img" aria-label="Coffee being poured"></span>, roasted here every Tuesday <span class="pill beans" role="img" aria-label="Roasted beans on our counter"></span> &amp; poured fresh for the road.</p>
         </div>
         <div class="ritual-actions">
@@ -185,8 +184,10 @@
       <h2>New beans, <span class="hl">first</span></h2>
       <form id="news-form" novalidate>
         <label class="sr" for="news-email">Email</label>
-        <input id="news-email" type="email" placeholder="Your email" autocomplete="email" required>
-        <button class="btn btn-mustard" type="submit">Sign up</button>
+        <div class="news-row">
+          <input id="news-email" type="email" placeholder="Your email" autocomplete="email" required>
+          <button class="btn btn-mustard" type="submit">Sign up</button>
+        </div>
         <p class="news-msg" id="news-msg" role="status"></p>
       </form>
     </div>
