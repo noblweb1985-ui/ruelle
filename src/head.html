@@ -215,25 +215,24 @@ html:not(.has3d) .spin-hint{ display:none }
 .tag{ justify-self:start; align-self:center; font:700 .7rem/1 var(--body); letter-spacing:.06em; text-transform:uppercase; background:var(--mustard); color:var(--ink); border-radius:999px; padding:6px 10px }
 .tag.alt{ background:var(--tile); color:var(--choc) }
 
-/* ---------- 04 Promise band ---------- */
-.promise{ background:var(--mustard); color:var(--ink); --tear-color:var(--mustard); --tear-bottom:var(--mustard); padding-block:clamp(80px, 9vw, 130px); overflow-x:clip }
-.promise-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0, 1.1fr) minmax(0,1fr); gap:clamp(20px, 4vw, 56px); align-items:center }
+/* ---------- 04 Promise band: the bean loop is the background ---------- */
+.promise{ --bean-bg:#FDB806; background:var(--bean-bg); color:var(--ink); --tear-color:var(--bean-bg); --tear-bottom:var(--bean-bg); padding-block:clamp(80px, 9vw, 130px); overflow-x:clip }
+.bean-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 47.8%; pointer-events:none; z-index:0;
+  -webkit-mask:linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask:linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%) }
+.promise-grid{ position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0, 1.1fr) minmax(0,1fr); gap:clamp(20px, 4vw, 56px); align-items:center }
 .promise-col{ display:grid; gap:clamp(48px, 8vw, 140px) }
 .promise-col.right{ text-align:right }
 .promise h3{ font-size:clamp(1.7rem, 1.3rem + 1.2vw, 2.4rem) }
 .promise p{ margin-top:10px; font-size:.98rem; color:#4E3322; max-width:34ch }
 .promise-col.right p{ margin-left:auto }
-.promise-art{ position:relative; aspect-ratio:1; max-width:520px; width:100%; justify-self:center }
-.promise-art .disc{ position:absolute; inset:0; border-radius:50%; background:url("media/promise.webp") center/cover; box-shadow:0 0 0 12px var(--choc), 0 30px 60px rgba(74,42,29,.35) }
-.promise-art .badge-ring{ position:absolute; right:-4%; top:2%; width:30%; aspect-ratio:1; border-radius:50%; background:var(--choc); color:var(--mustard); display:grid; place-items:center; text-align:center; font:800 1rem/1 var(--display); text-transform:uppercase; padding:10px; transform:rotate(10deg) }
-.promise-art .badge-ring b{ display:block; font-size:2.6em; line-height:.9; white-space:nowrap }
-.bean{ position:absolute; width:46px; height:auto; pointer-events:none }
+.promise-art{ aspect-ratio:1; max-width:520px; width:100%; justify-self:center }   /* empty: the bean shows through here */
 @media (max-width:860px){
-  .promise-grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr) }
-  .promise-art{ grid-column:1 / -1; order:-1; max-width:340px; margin-bottom:24px }
-  .promise-art .badge-ring{ right:0 }
+  .promise-grid{ grid-template-columns:minmax(0,1fr) }
   .promise-col{ gap:36px }
   .promise-col.right{ text-align:left } .promise-col.right p{ margin-left:0 }
+  .promise-art{ position:relative; z-index:-1; max-width:340px; margin-block:8px }
+  .promise .bean-video{ inset:auto; left:50%; top:50%; width:245%; height:auto; aspect-ratio:16 / 9; transform:translate(-50%, -50%);
+    -webkit-mask:radial-gradient(closest-side, #000 72%, transparent 100%); mask:radial-gradient(closest-side, #000 72%, transparent 100%) }
 }
 
 /* ---------- 05 Seasonal beans ---------- */

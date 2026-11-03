@@ -220,25 +220,24 @@ html:not(.has3d) .spin-hint{ display:none }
 .tag{ justify-self:start; align-self:center; font:700 .7rem/1 var(--body); letter-spacing:.06em; text-transform:uppercase; background:var(--mustard); color:var(--ink); border-radius:999px; padding:6px 10px }
 .tag.alt{ background:var(--tile); color:var(--choc) }
 
-/* ---------- 04 Promise band ---------- */
-.promise{ background:var(--mustard); color:var(--ink); --tear-color:var(--mustard); --tear-bottom:var(--mustard); padding-block:clamp(80px, 9vw, 130px); overflow-x:clip }
-.promise-grid{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0, 1.1fr) minmax(0,1fr); gap:clamp(20px, 4vw, 56px); align-items:center }
+/* ---------- 04 Promise band: the bean loop is the background ---------- */
+.promise{ --bean-bg:#FDB806; background:var(--bean-bg); color:var(--ink); --tear-color:var(--bean-bg); --tear-bottom:var(--bean-bg); padding-block:clamp(80px, 9vw, 130px); overflow-x:clip }
+.bean-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 47.8%; pointer-events:none; z-index:0;
+  -webkit-mask:linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask:linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%) }
+.promise-grid{ position:relative; z-index:1; display:grid; grid-template-columns:minmax(0,1fr) minmax(0, 1.1fr) minmax(0,1fr); gap:clamp(20px, 4vw, 56px); align-items:center }
 .promise-col{ display:grid; gap:clamp(48px, 8vw, 140px) }
 .promise-col.right{ text-align:right }
 .promise h3{ font-size:clamp(1.7rem, 1.3rem + 1.2vw, 2.4rem) }
 .promise p{ margin-top:10px; font-size:.98rem; color:#4E3322; max-width:34ch }
 .promise-col.right p{ margin-left:auto }
-.promise-art{ position:relative; aspect-ratio:1; max-width:520px; width:100%; justify-self:center }
-.promise-art .disc{ position:absolute; inset:0; border-radius:50%; background:url("media/promise.webp") center/cover; box-shadow:0 0 0 12px var(--choc), 0 30px 60px rgba(74,42,29,.35) }
-.promise-art .badge-ring{ position:absolute; right:-4%; top:2%; width:30%; aspect-ratio:1; border-radius:50%; background:var(--choc); color:var(--mustard); display:grid; place-items:center; text-align:center; font:800 1rem/1 var(--display); text-transform:uppercase; padding:10px; transform:rotate(10deg) }
-.promise-art .badge-ring b{ display:block; font-size:2.6em; line-height:.9; white-space:nowrap }
-.bean{ position:absolute; width:46px; height:auto; pointer-events:none }
+.promise-art{ aspect-ratio:1; max-width:520px; width:100%; justify-self:center }   /* empty: the bean shows through here */
 @media (max-width:860px){
-  .promise-grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr) }
-  .promise-art{ grid-column:1 / -1; order:-1; max-width:340px; margin-bottom:24px }
-  .promise-art .badge-ring{ right:0 }
+  .promise-grid{ grid-template-columns:minmax(0,1fr) }
   .promise-col{ gap:36px }
   .promise-col.right{ text-align:left } .promise-col.right p{ margin-left:0 }
+  .promise-art{ position:relative; z-index:-1; max-width:340px; margin-block:8px }
+  .promise .bean-video{ inset:auto; left:50%; top:50%; width:245%; height:auto; aspect-ratio:16 / 9; transform:translate(-50%, -50%);
+    -webkit-mask:radial-gradient(closest-side, #000 72%, transparent 100%); mask:radial-gradient(closest-side, #000 72%, transparent 100%) }
 }
 
 /* ---------- 05 Seasonal beans ---------- */
@@ -460,19 +459,13 @@ html:not(.has3d) .spin-hint{ display:none }
 
   <!-- 04 Promises -->
   <section class="promise torn torn-bottom" id="promise">
-    <svg class="bean" viewBox="0 0 40 52" style="left:3%; top:44%; transform:rotate(-24deg)" data-speed="-.12"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="right:4%; top:46%; width:34px; transform:rotate(38deg)" data-speed=".1"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="left:44%; bottom:6%; width:30px; transform:rotate(70deg)" data-speed="-.08"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="right:30%; top:4%; width:24px; transform:rotate(-60deg)" data-speed=".16"><use href="#bean"/></svg>
+    <video class="bean-video" id="bean-video" muted loop playsinline preload="none" poster="media/bean-poster.webp" aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
     <div class="wrap promise-grid">
       <div class="promise-col">
         <div><h3>— Direct trade</h3><p>We buy from three farms, above the market price, and go back to the same producers every harvest.</p></div>
         <div><h3>— Poured by hand</h3><p>Every shot is weighed and timed: 18 grams in, 36 grams out, about 28 seconds.</p></div>
       </div>
-      <div class="promise-art">
-        <div class="disc" role="img" aria-label="Coffee poured from a white cup above the clouds"></div>
-        <p class="badge-ring"><span><b>12 kg</b>per roast</span></p>
-      </div>
+      <div class="promise-art" aria-hidden="true"></div>
       <div class="promise-col right">
         <div><h3>Roasted Tuesdays —</h3><p>Small batches in our own roaster, behind the counter, profiled for each origin.</p></div>
         <div><h3>Fresh for 3 weeks —</h3><p>Every bag carries its roast date. After three weeks, we stop serving it.</p></div>
@@ -699,6 +692,7 @@ function createCup(THREE, canvas, opts){
    ===================================================================== */
 const SITE = {
   video: 'media/pour',                        // media/pour-1080.mp4 and media/pour-720.mp4
+  beanVideo: 'media/bean',                    // media/bean-1080.mp4 and media/bean-720.mp4, a seamless loop
   three: 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js',
   taxRate: 0.13, taxLabel: 'HST 13%',
   categories: [
@@ -888,6 +882,16 @@ const ICONS = {
     e.preventDefault(); const v = $('#news-email').value.trim();
     $('#news-msg').textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'You’re on the list. (Demo: nothing was sent.)' : 'Enter an email address like name@example.com.';
   });
+
+  /* ---------- Bean loop: decorative background of the promise band ---------- */
+  const bv = $('#bean-video');
+  bv.src = SITE.beanVideo + (window.matchMedia('(min-width: 900px)').matches ? '-1080.mp4' : '-720.mp4');
+  bv.muted = true;
+  if (!reduce && 'IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting){ bv.preload = 'auto'; const p = bv.play(); if (p && p.catch) p.catch(() => {}); } else bv.pause();
+    }), { rootMargin: '200px 0px' }).observe(bv);
+  }
 
   /* ---------- Header ---------- */
   const header = $('.site-header'), journey = $('#hero'), stage = $('#stage');

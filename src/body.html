@@ -99,19 +99,13 @@
 
   <!-- 04 Promises -->
   <section class="promise torn torn-bottom" id="promise">
-    <svg class="bean" viewBox="0 0 40 52" style="left:3%; top:44%; transform:rotate(-24deg)" data-speed="-.12"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="right:4%; top:46%; width:34px; transform:rotate(38deg)" data-speed=".1"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="left:44%; bottom:6%; width:30px; transform:rotate(70deg)" data-speed="-.08"><use href="#bean"/></svg>
-    <svg class="bean" viewBox="0 0 40 52" style="right:30%; top:4%; width:24px; transform:rotate(-60deg)" data-speed=".16"><use href="#bean"/></svg>
+    <video class="bean-video" id="bean-video" muted loop playsinline preload="none" poster="media/bean-poster.webp" aria-hidden="true" tabindex="-1" disablepictureinpicture></video>
     <div class="wrap promise-grid">
       <div class="promise-col">
         <div><h3>— Direct trade</h3><p>We buy from three farms, above the market price, and go back to the same producers every harvest.</p></div>
         <div><h3>— Poured by hand</h3><p>Every shot is weighed and timed: 18 grams in, 36 grams out, about 28 seconds.</p></div>
       </div>
-      <div class="promise-art">
-        <div class="disc" role="img" aria-label="Coffee poured from a white cup above the clouds"></div>
-        <p class="badge-ring"><span><b>12 kg</b>per roast</span></p>
-      </div>
+      <div class="promise-art" aria-hidden="true"></div>
       <div class="promise-col right">
         <div><h3>Roasted Tuesdays —</h3><p>Small batches in our own roaster, behind the counter, profiled for each origin.</p></div>
         <div><h3>Fresh for 3 weeks —</h3><p>Every bag carries its roast date. After three weeks, we stop serving it.</p></div>
@@ -221,6 +215,7 @@
    ===================================================================== */
 const SITE = {
   video: 'media/pour',                        // media/pour-1080.mp4 and media/pour-720.mp4
+  beanVideo: 'media/bean',                    // media/bean-1080.mp4 and media/bean-720.mp4, a seamless loop
   three: 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js',
   taxRate: 0.13, taxLabel: 'HST 13%',
   categories: [
@@ -410,6 +405,16 @@ const ICONS = {
     e.preventDefault(); const v = $('#news-email').value.trim();
     $('#news-msg').textContent = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'You’re on the list. (Demo: nothing was sent.)' : 'Enter an email address like name@example.com.';
   });
+
+  /* ---------- Bean loop: decorative background of the promise band ---------- */
+  const bv = $('#bean-video');
+  bv.src = SITE.beanVideo + (window.matchMedia('(min-width: 900px)').matches ? '-1080.mp4' : '-720.mp4');
+  bv.muted = true;
+  if (!reduce && 'IntersectionObserver' in window){
+    new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting){ bv.preload = 'auto'; const p = bv.play(); if (p && p.catch) p.catch(() => {}); } else bv.pause();
+    }), { rootMargin: '200px 0px' }).observe(bv);
+  }
 
   /* ---------- Header ---------- */
   const header = $('.site-header'), journey = $('#hero'), stage = $('#stage');
