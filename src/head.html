@@ -197,6 +197,8 @@ html:not(.has3d) .spin-hint{ display:none }
 .tile{ display:grid; justify-items:center; gap:14px; background:none; border:0; padding:0; cursor:pointer; color:var(--ink) }
 .tile .pic{ width:100%; aspect-ratio:1; border-radius:26px; background:var(--tile); display:grid; place-items:center; transition:transform .25s ease, background .2s ease, box-shadow .2s ease }
 .tile svg{ width:58%; height:58%; overflow:visible }
+.tile .pic img{ width:80%; height:80%; object-fit:contain; transition:transform .25s ease }
+.tile:hover .pic img{ transform:rotate(-4deg) scale(1.04) }
 .tile b{ font:800 1.15rem/1 var(--display); text-transform:uppercase; letter-spacing:.02em }
 .tile:hover .pic{ transform:translateY(-5px); background:#EEDFCB }
 .tile[aria-pressed="true"] .pic{ background:var(--mustard); box-shadow:0 10px 24px rgba(245,179,1,.35) }
@@ -239,6 +241,7 @@ html:not(.has3d) .spin-hint{ display:none }
 .bags{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:20px }
 .bag{ display:grid; grid-template-rows:auto 1fr; background:var(--cream); border-radius:26px; overflow:hidden }
 .bag-top{ position:relative; aspect-ratio:5 / 4; background:var(--c); color:var(--on-dark); padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden }
+.bag-top::before{ content:""; position:absolute; right:-20%; bottom:-25%; width:78%; aspect-ratio:1; background:url(media/sketch-coffee-bean-white.webp) center / contain no-repeat; opacity:.16; transform:rotate(-8deg); pointer-events:none }
 .bag-top::after{ content:""; position:absolute; right:-22%; bottom:-34%; width:80%; aspect-ratio:1; border-radius:50%; background:rgba(255,255,255,.08); box-shadow:0 0 0 26px rgba(255,255,255,.05) }
 .bag-top .origin{ font-weight:700; font-size:.86rem; letter-spacing:.08em; text-transform:uppercase; position:relative; z-index:1 }
 .bag-top h3{ font-size:clamp(2.4rem, 2rem + 1.4vw, 3.2rem); position:relative; z-index:1 }
@@ -290,12 +293,19 @@ html:not(.has3d) .spin-hint{ display:none }
 .hours tr.today td{ color:var(--mustard); font-weight:700 }
 .visit-actions{ display:flex; flex-wrap:wrap; gap:12px; align-items:center }
 .phone{ user-select:all; font-variant-numeric:tabular-nums; font-weight:700; padding:0 6px }
+.deco-clip{ position:absolute; inset:0; overflow:hidden; pointer-events:none }
+.visit-grid{ position:relative; z-index:1 }
+.visit .deco{ position:absolute; left:-70px; bottom:-60px; width:clamp(200px, 22vw, 320px); opacity:.08; transform:rotate(12deg); pointer-events:none }
+@media (max-width:900px){ .visit .deco{ display:none } }
 .visit-photo{ display:grid; gap:16px }
-.visit-photo img{ width:100%; aspect-ratio:4 / 3.2; object-fit:cover; object-position:64% 60%; border-radius:30px }
+.visit-photo img{ width:100%; height:auto; aspect-ratio:4 / 3.2; object-fit:cover; object-position:50% 70%; border-radius:30px }
 .amen{ display:flex; flex-wrap:wrap; gap:8px }
 .amen span{ font-size:.85rem; font-weight:600; background:rgba(255,255,255,.1); border-radius:999px; padding:8px 14px }
 
 /* ---------- 08 Footer ---------- */
+.site-footer{ position:relative }
+.site-footer .deco{ position:absolute; right:-40px; top:30px; width:clamp(180px, 20vw, 300px); opacity:.07; transform:rotate(-14deg); pointer-events:none }
+.site-footer > .wrap{ position:relative; z-index:1 }
 .site-footer{ background:var(--choc-deep); color:var(--on-dark); padding-block:clamp(64px, 8vw, 110px) calc(40px + env(safe-area-inset-bottom, 0px)) }
 .news{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:28px 48px; padding-bottom:56px; border-bottom:1px solid rgba(251,241,226,.14) }
 .news h2{ font-size:var(--step-3) }
@@ -351,4 +361,11 @@ html:not(.has3d) .spin-hint{ display:none }
 .toast .btn{ min-height:40px; padding:0 18px }
 
 ::view-transition-old(root), ::view-transition-new(root){ animation-duration:.25s }
+/* Back to top */
+.to-top{ position:fixed; z-index:29; right:calc(18px + env(safe-area-inset-right, 0px)); bottom:calc(18px + env(safe-area-inset-bottom, 0px)); width:52px; height:52px; border-radius:50%; display:grid; place-items:center;
+  background:var(--mustard); color:var(--ink); box-shadow:0 8px 22px rgba(44,25,17,.3); transition:opacity .25s ease, transform .25s ease, background .2s ease, color .2s ease }
+.to-top svg{ width:22px; height:22px }
+.to-top:hover{ background:var(--mustard-2) }
+.top-js .to-top:not(.show){ opacity:0; transform:translateY(14px); pointer-events:none; visibility:hidden }
+@media (prefers-reduced-motion: reduce){ .to-top{ transition:none } }
 </style>

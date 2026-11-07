@@ -202,6 +202,8 @@ html:not(.has3d) .spin-hint{ display:none }
 .tile{ display:grid; justify-items:center; gap:14px; background:none; border:0; padding:0; cursor:pointer; color:var(--ink) }
 .tile .pic{ width:100%; aspect-ratio:1; border-radius:26px; background:var(--tile); display:grid; place-items:center; transition:transform .25s ease, background .2s ease, box-shadow .2s ease }
 .tile svg{ width:58%; height:58%; overflow:visible }
+.tile .pic img{ width:80%; height:80%; object-fit:contain; transition:transform .25s ease }
+.tile:hover .pic img{ transform:rotate(-4deg) scale(1.04) }
 .tile b{ font:800 1.15rem/1 var(--display); text-transform:uppercase; letter-spacing:.02em }
 .tile:hover .pic{ transform:translateY(-5px); background:#EEDFCB }
 .tile[aria-pressed="true"] .pic{ background:var(--mustard); box-shadow:0 10px 24px rgba(245,179,1,.35) }
@@ -244,6 +246,7 @@ html:not(.has3d) .spin-hint{ display:none }
 .bags{ display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap:20px }
 .bag{ display:grid; grid-template-rows:auto 1fr; background:var(--cream); border-radius:26px; overflow:hidden }
 .bag-top{ position:relative; aspect-ratio:5 / 4; background:var(--c); color:var(--on-dark); padding:22px 24px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden }
+.bag-top::before{ content:""; position:absolute; right:-20%; bottom:-25%; width:78%; aspect-ratio:1; background:url(media/sketch-coffee-bean-white.webp) center / contain no-repeat; opacity:.16; transform:rotate(-8deg); pointer-events:none }
 .bag-top::after{ content:""; position:absolute; right:-22%; bottom:-34%; width:80%; aspect-ratio:1; border-radius:50%; background:rgba(255,255,255,.08); box-shadow:0 0 0 26px rgba(255,255,255,.05) }
 .bag-top .origin{ font-weight:700; font-size:.86rem; letter-spacing:.08em; text-transform:uppercase; position:relative; z-index:1 }
 .bag-top h3{ font-size:clamp(2.4rem, 2rem + 1.4vw, 3.2rem); position:relative; z-index:1 }
@@ -295,12 +298,19 @@ html:not(.has3d) .spin-hint{ display:none }
 .hours tr.today td{ color:var(--mustard); font-weight:700 }
 .visit-actions{ display:flex; flex-wrap:wrap; gap:12px; align-items:center }
 .phone{ user-select:all; font-variant-numeric:tabular-nums; font-weight:700; padding:0 6px }
+.deco-clip{ position:absolute; inset:0; overflow:hidden; pointer-events:none }
+.visit-grid{ position:relative; z-index:1 }
+.visit .deco{ position:absolute; left:-70px; bottom:-60px; width:clamp(200px, 22vw, 320px); opacity:.08; transform:rotate(12deg); pointer-events:none }
+@media (max-width:900px){ .visit .deco{ display:none } }
 .visit-photo{ display:grid; gap:16px }
-.visit-photo img{ width:100%; aspect-ratio:4 / 3.2; object-fit:cover; object-position:64% 60%; border-radius:30px }
+.visit-photo img{ width:100%; height:auto; aspect-ratio:4 / 3.2; object-fit:cover; object-position:50% 70%; border-radius:30px }
 .amen{ display:flex; flex-wrap:wrap; gap:8px }
 .amen span{ font-size:.85rem; font-weight:600; background:rgba(255,255,255,.1); border-radius:999px; padding:8px 14px }
 
 /* ---------- 08 Footer ---------- */
+.site-footer{ position:relative }
+.site-footer .deco{ position:absolute; right:-40px; top:30px; width:clamp(180px, 20vw, 300px); opacity:.07; transform:rotate(-14deg); pointer-events:none }
+.site-footer > .wrap{ position:relative; z-index:1 }
 .site-footer{ background:var(--choc-deep); color:var(--on-dark); padding-block:clamp(64px, 8vw, 110px) calc(40px + env(safe-area-inset-bottom, 0px)) }
 .news{ display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:28px 48px; padding-bottom:56px; border-bottom:1px solid rgba(251,241,226,.14) }
 .news h2{ font-size:var(--step-3) }
@@ -356,6 +366,13 @@ html:not(.has3d) .spin-hint{ display:none }
 .toast .btn{ min-height:40px; padding:0 18px }
 
 ::view-transition-old(root), ::view-transition-new(root){ animation-duration:.25s }
+/* Back to top */
+.to-top{ position:fixed; z-index:29; right:calc(18px + env(safe-area-inset-right, 0px)); bottom:calc(18px + env(safe-area-inset-bottom, 0px)); width:52px; height:52px; border-radius:50%; display:grid; place-items:center;
+  background:var(--mustard); color:var(--ink); box-shadow:0 8px 22px rgba(44,25,17,.3); transition:opacity .25s ease, transform .25s ease, background .2s ease, color .2s ease }
+.to-top svg{ width:22px; height:22px }
+.to-top:hover{ background:var(--mustard-2) }
+.top-js .to-top:not(.show){ opacity:0; transform:translateY(14px); pointer-events:none; visibility:hidden }
+@media (prefers-reduced-motion: reduce){ .to-top{ transition:none } }
 </style>
 </head>
 <body>
@@ -520,6 +537,7 @@ html:not(.has3d) .spin-hint{ display:none }
 
   <!-- 07 Visit -->
   <section class="visit band torn" id="visit">
+    <div class="deco-clip" aria-hidden="true"><img class="deco" src="media/sketch-moka-pot-white.webp" alt="" width="600" height="600" loading="lazy"></div>
     <div class="wrap visit-grid">
       <div>
         <p class="eyebrow">Come say hi</p>
@@ -532,7 +550,7 @@ html:not(.has3d) .spin-hint{ display:none }
         </div>
       </div>
       <div class="visit-photo">
-        <img src="media/counter.webp" alt="A Café Ruelle to-go cup on our wooden counter" loading="lazy">
+        <img src="media/shop-interior-960.webp" srcset="media/shop-interior-960.webp 960w, media/shop-interior-1920.webp 1920w" sizes="(max-width:900px) 92vw, 50vw" width="1920" height="1440" alt="Inside Café Ruelle: tall windows, round white tables and the pastry counter" loading="lazy" decoding="async">
         <div class="amen" id="amen"></div>
       </div>
     </div>
@@ -540,6 +558,7 @@ html:not(.has3d) .spin-hint{ display:none }
 </main>
 
 <footer class="site-footer">
+  <div class="deco-clip" aria-hidden="true"><img class="deco" src="media/sketch-coffee-branch-white.webp" alt="" width="600" height="600" loading="lazy"></div>
   <div class="wrap">
     <div class="news">
       <h2>New beans, <span class="hl">first</span></h2>
@@ -561,6 +580,8 @@ html:not(.has3d) .spin-hint{ display:none }
     <div class="fine"><span>© 2026 Café Ruelle</span><span>Café template for Façade · demo content, orders are not sent</span></div>
   </div>
 </footer>
+
+<a class="to-top" id="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 
 <dialog class="drawer" id="cart" aria-labelledby="cart-title">
   <div class="drawer-head"><h2 id="cart-title">Your order</h2><button class="x" type="button" id="cart-close" aria-label="Close your order">×</button></div>
@@ -698,8 +719,8 @@ const SITE = {
   three: 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js',
   taxRate: 0.13, taxLabel: 'HST 13%',
   categories: [
-    { id: 'espresso', name: 'Espresso' }, { id: 'lattes', name: 'Lattes' }, { id: 'cold', name: 'Cold brew' },
-    { id: 'tea', name: 'Tea' }, { id: 'pastry', name: 'Pastries' }, { id: 'beans', name: 'Beans', jump: '#coffee' }
+    { id: 'espresso', name: 'Espresso', sketch: 'media/sketch-portafilter.webp' }, { id: 'lattes', name: 'Lattes', sketch: 'media/sketch-to-go-cup.webp' }, { id: 'cold', name: 'Cold brew' },
+    { id: 'tea', name: 'Tea' }, { id: 'pastry', name: 'Pastries' }, { id: 'beans', name: 'Beans', jump: '#coffee', sketch: 'media/sketch-grinder.webp' }
   ],
   menu: [
     { cat: 'espresso', name: 'Espresso',        desc: 'House blend, 18 g in, 36 g out.',                 price: 3.50 },
@@ -833,11 +854,24 @@ const ICONS = {
   cart.addEventListener('click', e => { if (e.target === cart) cart.close(); });
   paintCart();
 
+  /* ---------- Back to top ---------- */
+  root.classList.add('top-js');
+  const toTop = $('#to-top');
+  const paintTop = () => toTop.classList.toggle('show', window.scrollY > innerHeight * 0.8);
+  window.addEventListener('scroll', paintTop, { passive: true }); paintTop();
+  toTop.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    $('.brand').focus({ preventScroll: true });
+  });
+
   /* ---------- Menu ---------- */
   let filter = null;
   SITE.categories.forEach(c => {
     const b = el('button', 'tile'); b.type = 'button'; b.dataset.id = c.id;
-    const pic = el('span', 'pic'); pic.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[c.id]}</svg>`;
+    const pic = el('span', 'pic');
+    if (c.sketch){ const img = el('img'); img.src = c.sketch; img.alt = ''; img.width = img.height = 400; img.loading = 'lazy'; img.decoding = 'async'; pic.classList.add('sketch'); pic.append(img); }
+    else pic.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[c.id]}</svg>`;
     b.append(pic, el('b', '', c.name));
     if (c.jump){ b.onclick = () => document.querySelector(c.jump).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
     else { b.setAttribute('aria-pressed', 'false'); b.onclick = () => { filter = filter === c.id ? null : c.id; paintMenu(); }; }

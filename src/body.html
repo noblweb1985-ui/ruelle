@@ -159,6 +159,7 @@
 
   <!-- 07 Visit -->
   <section class="visit band torn" id="visit">
+    <div class="deco-clip" aria-hidden="true"><img class="deco" src="media/sketch-moka-pot-white.webp" alt="" width="600" height="600" loading="lazy"></div>
     <div class="wrap visit-grid">
       <div>
         <p class="eyebrow">Come say hi</p>
@@ -171,7 +172,7 @@
         </div>
       </div>
       <div class="visit-photo">
-        <img src="media/counter.webp" alt="A Café Ruelle to-go cup on our wooden counter" loading="lazy">
+        <img src="media/shop-interior-960.webp" srcset="media/shop-interior-960.webp 960w, media/shop-interior-1920.webp 1920w" sizes="(max-width:900px) 92vw, 50vw" width="1920" height="1440" alt="Inside Café Ruelle: tall windows, round white tables and the pastry counter" loading="lazy" decoding="async">
         <div class="amen" id="amen"></div>
       </div>
     </div>
@@ -179,6 +180,7 @@
 </main>
 
 <footer class="site-footer">
+  <div class="deco-clip" aria-hidden="true"><img class="deco" src="media/sketch-coffee-branch-white.webp" alt="" width="600" height="600" loading="lazy"></div>
   <div class="wrap">
     <div class="news">
       <h2>New beans, <span class="hl">first</span></h2>
@@ -201,6 +203,8 @@
   </div>
 </footer>
 
+<a class="to-top" id="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
 <dialog class="drawer" id="cart" aria-labelledby="cart-title">
   <div class="drawer-head"><h2 id="cart-title">Your order</h2><button class="x" type="button" id="cart-close" aria-label="Close your order">×</button></div>
   <div class="drawer-body" id="cart-body"></div>
@@ -220,8 +224,8 @@ const SITE = {
   three: 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js',
   taxRate: 0.13, taxLabel: 'HST 13%',
   categories: [
-    { id: 'espresso', name: 'Espresso' }, { id: 'lattes', name: 'Lattes' }, { id: 'cold', name: 'Cold brew' },
-    { id: 'tea', name: 'Tea' }, { id: 'pastry', name: 'Pastries' }, { id: 'beans', name: 'Beans', jump: '#coffee' }
+    { id: 'espresso', name: 'Espresso', sketch: 'media/sketch-portafilter.webp' }, { id: 'lattes', name: 'Lattes', sketch: 'media/sketch-to-go-cup.webp' }, { id: 'cold', name: 'Cold brew' },
+    { id: 'tea', name: 'Tea' }, { id: 'pastry', name: 'Pastries' }, { id: 'beans', name: 'Beans', jump: '#coffee', sketch: 'media/sketch-grinder.webp' }
   ],
   menu: [
     { cat: 'espresso', name: 'Espresso',        desc: 'House blend, 18 g in, 36 g out.',                 price: 3.50 },
@@ -355,11 +359,24 @@ const ICONS = {
   cart.addEventListener('click', e => { if (e.target === cart) cart.close(); });
   paintCart();
 
+  /* ---------- Back to top ---------- */
+  root.classList.add('top-js');
+  const toTop = $('#to-top');
+  const paintTop = () => toTop.classList.toggle('show', window.scrollY > innerHeight * 0.8);
+  window.addEventListener('scroll', paintTop, { passive: true }); paintTop();
+  toTop.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    $('.brand').focus({ preventScroll: true });
+  });
+
   /* ---------- Menu ---------- */
   let filter = null;
   SITE.categories.forEach(c => {
     const b = el('button', 'tile'); b.type = 'button'; b.dataset.id = c.id;
-    const pic = el('span', 'pic'); pic.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[c.id]}</svg>`;
+    const pic = el('span', 'pic');
+    if (c.sketch){ const img = el('img'); img.src = c.sketch; img.alt = ''; img.width = img.height = 400; img.loading = 'lazy'; img.decoding = 'async'; pic.classList.add('sketch'); pic.append(img); }
+    else pic.innerHTML = `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[c.id]}</svg>`;
     b.append(pic, el('b', '', c.name));
     if (c.jump){ b.onclick = () => document.querySelector(c.jump).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
     else { b.setAttribute('aria-pressed', 'false'); b.onclick = () => { filter = filter === c.id ? null : c.id; paintMenu(); }; }
